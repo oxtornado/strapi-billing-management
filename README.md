@@ -1,61 +1,97 @@
-# 🚀 Getting started with Strapi
+# README - Proceso de Facturación en una Tienda
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+## Descripción del Proyecto
+Este proyecto implementa un sistema de facturación para una tienda, gestionando clientes, cajeros, vendedoras, productos y las facturas generadas por cada transacción. Se ha desarrollado utilizando **Strapi** como backend y **SQLite** como motor de base de datos.
 
-### `develop`
+## Instalación y Configuración
+### Prerrequisitos
+- Tener instalado **Node.js** y **npm**.
+- Tener instalado **Strapi**.
+- Tener configurado **SQLite** como motor de base de datos.
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+### Pasos para instalar y ejecutar el proyecto
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/tu-repo/facturacion-tienda.git
+   cd facturacion-tienda
+   ```
+2. Instalar las dependencias:
+   ```bash
+   npm install
+   ```
+3. Iniciar el servidor de Strapi:
+   ```bash
+   npm run develop
+   ```
+4. Acceder al panel de administración de Strapi en:
+   ```
+   http://localhost:1337/admin
+   ```
 
+## Modelo de Base de Datos
+El sistema maneja las siguientes entidades:
+
+1. **Cajero**: ID del cajero, nombre, apellido, turno de trabajo.
+2. **Vendedora**: ID de la vendedora, nombre, apellido, turno de trabajo.
+3. **Cliente**: ID del cliente, nombre, apellido, dirección, correo electrónico, teléfono.
+4. **Productos**: ID del producto, nombre, descripción, precio, cantidad en stock.
+5. **Factura**: ID de la factura, ID del cajero, ID del cliente, fecha de emisión, total.
+6. **Detalle Factura**: ID del producto, ID de la factura, cantidad comprada, precio unitario, subtotal.
+
+### Relaciones
+- Un **cajero** puede procesar varias facturas.
+- Una **factura** está asociada a un único cajero y un único cliente.
+- Un **cliente** puede tener múltiples facturas.
+- Una **factura** puede contener varios productos mediante el **detalle de factura**.
+- Una **vendedora** atiende a los clientes en la tienda.
+
+## Reglas de Negocio
+1. No se puede generar una factura sin al menos un producto.
+2. Si un producto no tiene suficiente stock, no se puede procesar la venta.
+3. El total de la factura se calcula como la suma de los subtotales de los productos.
+4. Cada factura debe estar asociada a un cliente registrado en el sistema.
+5. No se pueden eliminar facturas ya emitidas, solo anularlas dejando registro de la transacción.
+6. Un cajero solo puede procesar facturas durante su turno de trabajo.
+7. Las devoluciones solo pueden realizarse dentro de un período de 7 días posteriores a la compra.
+
+## Datos de Prueba
+Para poblar la base de datos con datos de prueba, puedes ejecutar el siguiente comando en el directorio del proyecto:
+```bash
+npm run seed
 ```
-npm run develop
-# or
-yarn develop
-```
 
-### `start`
+## API Endpoints
+Los siguientes endpoints están disponibles para realizar consultas:
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+### Facturas
+- **Obtener todas las facturas:** `GET /facturas`
+- **Obtener una factura por ID:** `GET /facturas/:id`
+- **Crear una nueva factura:** `POST /facturas`
+- **Eliminar una factura:** `DELETE /facturas/:id`
 
-```
-npm run start
-# or
-yarn start
-```
+### Clientes
+- **Obtener todos los clientes:** `GET /clientes`
+- **Obtener un cliente por ID:** `GET /clientes/:id`
+- **Crear un nuevo cliente:** `POST /clientes`
 
-### `build`
+### Productos
+- **Obtener todos los productos:** `GET /productos`
+- **Obtener un producto por ID:** `GET /productos/:id`
+- **Actualizar stock de un producto:** `PUT /productos/:id`
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+## Consultas Esperadas
+- Listar todas las facturas de un cliente específico.
+- Consultar el total de ventas realizadas en un periodo de tiempo.
+- Ver los productos más vendidos.
 
-```
-npm run build
-# or
-yarn build
-```
+## Contribución
+Si deseas contribuir a este proyecto, por favor sigue estos pasos:
+1. Haz un fork del repositorio.
+2. Crea una rama nueva (`git checkout -b feature-nueva`).
+3. Realiza tus cambios y haz commit (`git commit -m 'Descripción del cambio'`).
+4. Sube tus cambios (`git push origin feature-nueva`).
+5. Crea un Pull Request.
 
-## ⚙️ Deployment
+## Licencia
+Este proyecto está bajo la licencia MIT.
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
-
-```
-yarn strapi deploy
-```
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
