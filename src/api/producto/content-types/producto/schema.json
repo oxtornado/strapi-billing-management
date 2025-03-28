@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "productos",
+  "info": {
+    "singularName": "producto",
+    "pluralName": "productos",
+    "displayName": "Producto"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombreProducto": {
+      "type": "string"
+    },
+    "descripcionProducto": {
+      "type": "string"
+    },
+    "precioProducto": {
+      "type": "decimal"
+    },
+    "cantidadStockProducto": {
+      "type": "integer"
+    },
+    "detalle_facturas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::detalle-factura.detalle-factura",
+      "mappedBy": "producto"
+    }
+  }
+}

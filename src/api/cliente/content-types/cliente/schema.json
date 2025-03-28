@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clientes",
+  "info": {
+    "singularName": "cliente",
+    "pluralName": "clientes",
+    "displayName": "Cliente"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombreCliente": {
+      "type": "string"
+    },
+    "apellidoCliente": {
+      "type": "string"
+    },
+    "direccionCliente": {
+      "type": "string"
+    },
+    "correoElectronicoCliente": {
+      "type": "email"
+    },
+    "telefonoCliente": {
+      "type": "integer"
+    },
+    "factura": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::factura.factura",
+      "mappedBy": "cliente"
+    }
+  }
+}

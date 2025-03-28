@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "facturas",
+  "info": {
+    "singularName": "factura",
+    "pluralName": "facturas",
+    "displayName": "Factura",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fechaEmisionFactura": {
+      "type": "string"
+    },
+    "totalFactura": {
+      "type": "decimal"
+    },
+    "cajero": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cajero.cajero",
+      "inversedBy": "facturas"
+    },
+    "cliente": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cliente.cliente",
+      "inversedBy": "factura"
+    },
+    "vendedora": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::vendedora.vendedora",
+      "inversedBy": "factura"
+    },
+    "detalle_factura": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::detalle-factura.detalle-factura",
+      "inversedBy": "facturas"
+    }
+  }
+}

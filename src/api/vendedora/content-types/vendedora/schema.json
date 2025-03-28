@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendedoras",
+  "info": {
+    "singularName": "vendedora",
+    "pluralName": "vendedoras",
+    "displayName": "Vendedora"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombreVendedora": {
+      "type": "string"
+    },
+    "apellidoVendedora": {
+      "type": "string"
+    },
+    "turnoTrabajoVendedora": {
+      "type": "string"
+    },
+    "factura": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::factura.factura",
+      "mappedBy": "vendedora"
+    }
+  }
+}

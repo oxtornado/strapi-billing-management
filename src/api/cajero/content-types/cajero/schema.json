@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cajeros",
+  "info": {
+    "singularName": "cajero",
+    "pluralName": "cajeros",
+    "displayName": "Cajero"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombreCajero": {
+      "type": "string"
+    },
+    "apellidoCajero": {
+      "type": "string"
+    },
+    "turnoTrabajoCajero": {
+      "type": "string"
+    },
+    "facturas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::factura.factura",
+      "mappedBy": "cajero"
+    }
+  }
+}
