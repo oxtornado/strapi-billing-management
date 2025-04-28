@@ -12,7 +12,7 @@
   },
   "attributes": {
     "fechaEmisionFactura": {
-      "type": "string"
+      "type": "date"
     },
     "totalFactura": {
       "type": "decimal"
@@ -23,23 +23,23 @@
       "target": "api::cajero.cajero",
       "inversedBy": "facturas"
     },
-    "cliente": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cliente.cliente",
-      "inversedBy": "factura"
-    },
     "vendedora": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::vendedora.vendedora",
-      "inversedBy": "factura"
+      "inversedBy": "facturas"
     },
-    "detalle_factura": {
+    "cliente": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::detalle-factura.detalle-factura",
+      "target": "api::cliente.cliente",
       "inversedBy": "facturas"
+    },
+    "detalle_facturas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::detalle-factura.detalle-factura",
+      "mappedBy": "factura"
     }
   }
 }

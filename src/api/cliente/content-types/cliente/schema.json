@@ -4,7 +4,8 @@
   "info": {
     "singularName": "cliente",
     "pluralName": "clientes",
-    "displayName": "Cliente"
+    "displayName": "Cliente",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -25,9 +26,9 @@
     "telefonoCliente": {
       "type": "integer"
     },
-    "factura": {
+    "facturas": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::factura.factura",
       "mappedBy": "cliente"
     }

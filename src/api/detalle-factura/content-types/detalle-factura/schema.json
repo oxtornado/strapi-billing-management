@@ -11,11 +11,11 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "facturas": {
+    "factura": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::factura.factura",
-      "mappedBy": "detalle_factura"
+      "inversedBy": "detalle_facturas"
     },
     "producto": {
       "type": "relation",

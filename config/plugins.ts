@@ -1,1 +1,5 @@
-export default () => ({});
+export default {
+    "generate-data": {
+        enabled: true,
+    },
+};

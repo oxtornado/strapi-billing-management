@@ -4,7 +4,8 @@
   "info": {
     "singularName": "vendedora",
     "pluralName": "vendedoras",
-    "displayName": "Vendedora"
+    "displayName": "Vendedora",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,9 +20,9 @@
     "turnoTrabajoVendedora": {
       "type": "string"
     },
-    "factura": {
+    "facturas": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::factura.factura",
       "mappedBy": "vendedora"
     }

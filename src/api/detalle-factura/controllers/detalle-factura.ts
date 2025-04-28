@@ -43,24 +43,26 @@ export default factories.createCoreController('api::detalle-factura.detalle-fact
   // Método para obtener detalles por factura (este necesita un ID de factura)
   async findByFactura(ctx) {
     try {
+      console.log('ctx.params:', ctx.params); // Agregado para depuración
       const { facturaId } = ctx.params;
       
-      // Verificar que el facturaId es válido
       if (!facturaId) {
         return ctx.badRequest('ID de factura no proporcionado');
       }
-
-      // Usar el método correcto para filtrar por factura
+  
       const detallesFactura = await strapi.db.query('api::detalle-factura.detalle-factura').findMany({
         where: { factura: { id: facturaId } },
         populate: ['producto']
       });
-
+  
       if (!detallesFactura || detallesFactura.length === 0) {
         return ctx.notFound('No se encontraron detalles para esta factura');
       }
-
-      return { data: detallesFactura };
+  
+      return { 
+        "la factura": facturaId, 
+        "productos que se encuentran en la factura": detallesFactura 
+      };
     } catch (error) {
       console.error('Error al buscar detalles por factura:', error);
       return ctx.badRequest(`Error al obtener detalles de factura: ${error.message}`);
