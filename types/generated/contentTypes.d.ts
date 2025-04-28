@@ -446,6 +446,7 @@ export interface ApiDetalleFacturaDetalleFactura
     draftAndPublish: true;
   };
   attributes: {
+    cantidadCompradaDetalleFactura: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -456,8 +457,10 @@ export interface ApiDetalleFacturaDetalleFactura
       'api::detalle-factura.detalle-factura'
     > &
       Schema.Attribute.Private;
+    precioUnitarioDetalleFactura: Schema.Attribute.Decimal;
     producto: Schema.Attribute.Relation<'manyToOne', 'api::producto.producto'>;
     publishedAt: Schema.Attribute.DateTime;
+    subtotalDetalleFactura: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -22,6 +22,15 @@
       "relation": "manyToOne",
       "target": "api::producto.producto",
       "inversedBy": "detalle_facturas"
+    },
+    "cantidadCompradaDetalleFactura": {
+      "type": "integer"
+    },
+    "precioUnitarioDetalleFactura": {
+      "type": "decimal"
+    },
+    "subtotalDetalleFactura": {
+      "type": "decimal"
     }
   }
 }
