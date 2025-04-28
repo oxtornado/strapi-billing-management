@@ -46,13 +46,17 @@ El sistema maneja las siguientes entidades:
 - Una **vendedora** atiende a los clientes en la tienda.
 
 ## Reglas de Negocio
-1. No se puede generar una factura sin al menos un producto.
-2. Si un producto no tiene suficiente stock, no se puede procesar la venta.
-3. El total de la factura se calcula como la suma de los subtotales de los productos.
-4. Cada factura debe estar asociada a un cliente registrado en el sistema.
-5. No se pueden eliminar facturas ya emitidas, solo anularlas dejando registro de la transacción.
-6. Un cajero solo puede procesar facturas durante su turno de trabajo.
-7. Las devoluciones solo pueden realizarse dentro de un período de 7 días posteriores a la compra.
+1. Un cliente puede realizar varias compras (facturas), pero cada factura está asociada a una única transacción con un cajero y una vendedora.
+2. Cada producto vendido debe estar registrado en una factura.
+3. El precio total de una factura se calcula como la suma de los subtotales de los productos vendidos.
+4. El cajero es quien procesa el pago, mientras que la vendedora asiste en la venta.
+5. La cantidad de productos en stock debe actualizarse después de realizar una venta.
+6. No se puede generar una factura sin al menos un producto.
+7. Si un producto no tiene suficiente stock, no se puede procesar la venta.
+8. Cada factura debe estar asociada a un cliente registrado en el sistema.
+9. No se pueden eliminar facturas ya emitidas, solo anularlas dejando registro de la transacción.
+10. Un cajero solo puede procesar facturas durante su turno de trabajo.
+11. Las devoluciones solo pueden realizarse dentro de un período de 7 días posteriores a la compra.
 
 ## Datos de Prueba
 Para poblar la base de datos con datos de prueba, puedes ejecutar el siguiente comando en el directorio del proyecto:
@@ -80,9 +84,44 @@ Los siguientes endpoints están disponibles para realizar consultas:
 - **Actualizar stock de un producto:** `PUT /productos/:id`
 
 ## Consultas Esperadas
-- Listar todas las facturas de un cliente específico.
-- Consultar el total de ventas realizadas en un periodo de tiempo.
-- Ver los productos más vendidos.
+A continuación, se detallan algunas de las consultas más comunes:
+
+### i. Consultar todas las facturas emitidas por un cajero en un día específico.
+**GET** `http://localhost:1337/api/facturas/cajero/1/dia/2025-04-28`
+
+**Authorization:** Bearer `<token>`
+
+**Content-Type:** application/json
+
+### ii. Ver los productos vendidos en una factura específica.
+**GET** `http://localhost:1337/api/detalle-facturas/factura/11`
+
+**Authorization:** Bearer `<token>`
+
+**Content-Type:** application/json
+
+### iii. Obtener el total de ventas realizadas por una vendedora durante un periodo de tiempo.
+**GET** `http://localhost:1337/api/facturas/ventas/vendedora/3?fechaInicio=2024-04-01&fechaFin=2025-04-30`
+
+**Authorization:** Bearer `<token>`
+
+**Content-Type:** application/json
+
+### iv. Consultar el historial de compras de un cliente.
+**GET** `http://localhost:1337/api/facturas/historial-compras/cliente/3`
+
+**Authorization:** Bearer `<token>`
+
+**Content-Type:** application/json
+
+### v. Verificar el stock de productos antes de realizar una venta.
+Este endpoint podría ser implementado para verificar el stock antes de procesar una venta, pero no está definido en los ejemplos previos. Sin embargo, sería algo como:
+
+**GET** `http://localhost:1337/api/productos/stock/:idProducto`
+
+**Authorization:** Bearer `<token>`
+
+**Content-Type:** application/json
 
 ## Contribución
 Si deseas contribuir a este proyecto, por favor sigue estos pasos:
@@ -94,4 +133,3 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 
 ## Licencia
 Este proyecto está bajo la licencia MIT.
-
